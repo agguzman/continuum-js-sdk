@@ -48,7 +48,7 @@ export default (host, port, protocol, token) => {
                 missingParams = checkParams(attributes, requiredParams);
                 missing = missingParams.length > 0;
                 if (missing) {
-                    throw `Creating a Project requires ${missingParams}.`
+                    throw new Error(`Creating a Project requires ${missingParams}.`)
                 }
 
                 body = {
@@ -63,7 +63,7 @@ export default (host, port, protocol, token) => {
                 missingParams = checkParams(attributes, requiredParams);
                 missing = missingParams.length > 0;
                 if (missing) {
-                    throw `Creating an Asset requires ${missingParams}.`
+                    throw new Error(`Creating an Asset requires ${missingParams}.`)
                 }
 
                 body = {
@@ -78,7 +78,7 @@ export default (host, port, protocol, token) => {
                 missingParams = checkParams(attributes, requiredParams);
                 missing = missingParams.length > 0;
                 if (missing) {
-                    throw `Creating a Cloud requires ${missingParams}.`
+                    throw new Error(`Creating a Cloud requires ${missingParams}.`)
                 }
 
                 body = {
@@ -90,7 +90,7 @@ export default (host, port, protocol, token) => {
                 break;
 
             default:
-                throw `Sorry, I don't know how to handle asset ${asset}.`
+                throw new Error(`Sorry, I don't know how to handle asset ${asset}.`)
         }
         return ajax.post(createEndpoint, body);
     };
