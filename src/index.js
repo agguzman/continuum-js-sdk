@@ -1,17 +1,17 @@
-var get_url = require('./get_url');
-var axios = require('axios');
+import getUrl from './getUrl';
+import axios from 'axios';
 
-module.exports = function (host, port, protocol, token) {
-    var baseUrl = get_url(host, port, protocol);
-    var apiUrl = baseUrl + '/api';
-    var headers = {
+export default (host, port, protocol, token) => {
+    const baseUrl = getUrl(host, port, protocol);
+    const apiUrl = baseUrl + '/api';
+    const headers = {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         Authorization: 'Token ' + token
     };
 
-    var ajax = axios.create({
-        baseURL: base_url,
+    let ajax = axios.create({
+        baseURL: baseUrl,
         timeout: 1000,
         headers: headers
     });
