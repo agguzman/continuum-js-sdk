@@ -1,11 +1,12 @@
-var create_sdk = require('./../src/index');
+import createSdk from './../dist/index';
 
-var sdk = create_sdk("localhost", "8080", "http", "587544bc1e8d800502f822d7");
+const sdk = createSdk("localhost", "8080", "http", "58741bdea64571262822d365");
 
-console.log(sdk);
-
-sdk.create('project', {
-    name: 'sdk another project1'
+sdk.create('cloud', {
+    name: 'cloud created from sdk1',
+    provider: 'Amazon AWS',
+    apiUrl: 'localhost',
+    apiProtocol: 'https'
 }).then(function(response) {
     console.log(response.data)
 }).catch(function(error) {
