@@ -33,7 +33,7 @@ export default (host, port, protocol, token) => {
         const assets = ['project', 'change', 'cloud', 'asset'];
 
         if (!assets.includes(asset)) {
-            throw `Asset ${asset} not available to create.`
+            throw new Error(`Asset ${asset} not available to create.`)
         }
 
         let endpoint = apiUrl;
