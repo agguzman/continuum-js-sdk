@@ -38,9 +38,6 @@ export default (host, port, protocol, token) => {
 
         let createEndpoint = `${apiUrl}/create_`;
         let requiredParams;
-        let missingParams;
-        let missing;
-        let body;
 
         const creation = {
             'project': () => {
