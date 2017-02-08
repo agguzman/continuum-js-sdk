@@ -30,7 +30,7 @@ export default (host, port, protocol, token) => {
     };
 
     let create = (asset, attributes) => {
-        const assets = ['project', 'change', 'cloud', 'asset'];
+        const assets = ['project', 'change', 'cloud', 'asset', 'account', 'credential', 'tag', 'user'];
 
         if (!assets.includes(asset)) {
             throw new Error(`Asset ${asset} not available to create.`)
@@ -42,43 +42,75 @@ export default (host, port, protocol, token) => {
         let missing;
         let body;
 
-        switch(asset) {
-            case 'project':
+        const creation = {
+            'project': () => {
                 requiredParams = ['name'];
                 checkParams(asset, attributes, requiredParams);
-
-                body = {
-                    ...attributes
-                };
-                createEndpoint += asset;
-                break;
-
-            case 'asset':
+                return {
+                    body: { ...attributes },
+                    endpoint: createEndpoint += asset
+                }
+            },
+            'asset': () => {
                 requiredParams = ['name'];
                 checkParams(asset, attributes, requiredParams);
-
-                body = {
-                    ...attributes
-                };
-                createEndpoint += asset;
-                break;
-
-            case 'cloud':
+                return {
+                    body: { ...attributes },
+                    endpoint: createEndpoint += asset
+                }
+            },
+            'cloud': () => {
                 requiredParams = ['name', 'provider', 'apiUrl', 'apiProtocol'];
                 checkParams(asset, attributes, requiredParams);
+                return {
+                    body: {
+                        apiurl: attributes.apiUrl,
+                        apiprotocol: attributes.apiProtocol,
+                        ...attributes
+                    },
+                    endpoint: createEndpoint += asset
+                }
+            },
+            'account': () => {
+                requiredParams = ['name', 'provider', 'login', 'password', 'defaultCloud'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: {
+                        default_cloud: attributes.defaultCloud,
+                        ...attributes
+                    },
+                    endpoint: createEndpoint += asset
+                }
+            },
+            'credential': () => {
+                requiredParams = ['name', 'username', 'password'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { ...attributes },
+                    endpoint: createEndpoint += asset
+                }
+            },
+            'tag': () => {
+                requiredParams = ['name'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { ...attributes },
+                    endpoint: createEndpoint += asset
+                }
+            },
+            'user': () => {
+                requiredParams = ['user', 'name', 'role'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { ...attributes },
+                    endpoint: createEndpoint += asset
+                }
+            }
 
-                body = {
-                    apiurl: attributes.apiUrl,
-                    apiprotocol: attributes.apiProtocol,
-                    ...attributes
-                };
-                createEndpoint += asset;
-                break;
+        };
 
-            default:
-                throw new Error(`Sorry, I don't know how to handle asset ${asset}.`)
-        }
-        return ajax.post(createEndpoint, body);
+        const c = creation[asset]();
+        return ajax.post(c.endpoint, c.body);
     };
 
     return {
