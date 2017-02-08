@@ -16,14 +16,17 @@ export default (host, port, protocol, token) => {
         headers: headers
     });
 
-    let checkParams = (attributes, requiredParams) => {
+    let checkParams = (asset, attributes, requiredParams) => {
         let missingParams = [];
         requiredParams.map((param) => {
             if (!attributes.hasOwnProperty(param)) {
                 missingParams.push(param);
             }
         });
-        return missingParams;
+        if (missingParams.length > 0) {
+            let x = ['a', 'e', 'i', 'o', 'u'].includes(asset.charAt(0).toLowerCase()) ? 'an' : 'a';
+            throw new Error(`Creating ${x} ${asset} requires ${missingParams}.`)
+        }
     };
 
     let create = (asset, attributes) => {
@@ -44,12 +47,7 @@ export default (host, port, protocol, token) => {
         switch(asset) {
             case 'project':
                 requiredParams = ['name'];
-
-                missingParams = checkParams(attributes, requiredParams);
-                missing = missingParams.length > 0;
-                if (missing) {
-                    throw new Error(`Creating a Project requires ${missingParams}.`)
-                }
+                checkParams(asset, attributes, requiredParams);
 
                 body = {
                     ...attributes
@@ -59,12 +57,7 @@ export default (host, port, protocol, token) => {
 
             case 'asset':
                 requiredParams = ['name'];
-
-                missingParams = checkParams(attributes, requiredParams);
-                missing = missingParams.length > 0;
-                if (missing) {
-                    throw new Error(`Creating an Asset requires ${missingParams}.`)
-                }
+                checkParams(asset, attributes, requiredParams);
 
                 body = {
                     ...attributes
@@ -74,12 +67,7 @@ export default (host, port, protocol, token) => {
 
             case 'cloud':
                 requiredParams = ['name', 'provider', 'apiUrl', 'apiProtocol'];
-
-                missingParams = checkParams(attributes, requiredParams);
-                missing = missingParams.length > 0;
-                if (missing) {
-                    throw new Error(`Creating a Cloud requires ${missingParams}.`)
-                }
+                checkParams(asset, attributes, requiredParams);
 
                 body = {
                     apiurl: attributes.apiUrl,
