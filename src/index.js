@@ -36,9 +36,7 @@ export default (host, port, protocol, token) => {
             throw new Error(`Asset ${asset} not available to create.`)
         }
 
-        let endpoint = apiUrl;
-        let createEndpoint = `${endpoint}/create_`;
-
+        let createEndpoint = `${apiUrl}/create_`;
         let requiredParams;
         let missingParams;
         let missing;
