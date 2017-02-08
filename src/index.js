@@ -3,11 +3,11 @@ import axios from 'axios';
 
 export default (host, port, protocol, token) => {
     const baseUrl = getUrl(host, port, protocol);
-    const apiUrl = baseUrl + '/api';
+    const apiUrl = `${baseUrl}/api`;
     const headers = {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: 'Token ' + token
+        Authorization: `Token ${token}`
     };
 
     let ajax = axios.create({
@@ -182,6 +182,6 @@ export default (host, port, protocol, token) => {
 
     return {
         create: create,
-        configurePlugin: configurePlugin
+        // configurePlugin: configurePlugin
     }
 }
