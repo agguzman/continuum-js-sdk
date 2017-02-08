@@ -16,6 +16,12 @@ export default (host, port, protocol, token) => {
         headers: headers
     });
 
+    let checkAvailableAssets = (asset, availableAssets=[]) => {
+        if (!availableAssets.includes(asset)) {
+            throw new Error(`Asset ${asset} not available to create.`)
+        }
+    };
+
     let checkParams = (asset, attributes, requiredParams) => {
         let missingParams = [];
         requiredParams.map((param) => {
@@ -31,10 +37,7 @@ export default (host, port, protocol, token) => {
 
     let create = (asset, attributes) => {
         const assets = ['project', 'change', 'cloud', 'asset', 'account', 'credential', 'tag', 'user'];
-
-        if (!assets.includes(asset)) {
-            throw new Error(`Asset ${asset} not available to create.`)
-        }
+        checkAvailableAssets(asset, availableAssets=assets);
 
         let createEndpoint = `${apiUrl}/create_`;
         let requiredParams;
