@@ -35,6 +35,19 @@ export default (host, port, protocol, token) => {
         }
     };
 
+    let update = (asset, attributes) => {
+        const asset = [''];
+        checkAvailableAssets(asset, availableAssets=assets);
+        let updateEndpoint = `${apiUrl}/update_`;
+
+        const updator = {
+
+        };
+
+        const u = updator[asset]();
+        return ajax.post(u.endpoint, u.body);
+    };
+
     let create = (asset, attributes) => {
         const assets = ['project', 'change', 'cloud', 'asset', 'account', 'credential', 'tag', 'user'];
         checkAvailableAssets(asset, availableAssets=assets);
