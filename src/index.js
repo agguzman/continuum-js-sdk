@@ -41,7 +41,7 @@ export default (host, port, protocol, token) => {
 
         let createEndpoint = `${apiUrl}/create_`;
 
-        const creation = {
+        const creator = {
             'project': () => {
                 const requiredParams = ['name'];
                 checkParams(asset, attributes, requiredParams);
@@ -108,7 +108,7 @@ export default (host, port, protocol, token) => {
 
         };
 
-        const c = creation[asset]();
+        const c = creator[asset]();
         return ajax.post(c.endpoint, c.body);
     };
 
