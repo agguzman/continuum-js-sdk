@@ -17,7 +17,7 @@ export default (host, port, protocol, token) => {
     });
 
     let checkAvailableAssets = (asset, availableAssets=[]) => {
-        if (!availableAssets.includes(asset)) {
+        if (!availableAssets.includes(asset.toLowerCase())) {
             throw new Error(`Asset ${asset} not available to create.`)
         }
     };
@@ -118,7 +118,6 @@ export default (host, port, protocol, token) => {
                     endpoint: createEndpoint += asset
                 }
             }
-
         };
 
         const c = creator[asset]();
