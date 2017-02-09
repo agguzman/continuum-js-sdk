@@ -49,7 +49,7 @@ export default (host, port, protocol, token) => {
     };
 
     let create = (asset, attributes) => {
-        const assets = ['project', 'change', 'cloud', 'asset', 'account', 'credential', 'tag', 'user'];
+        const assets = ['project', 'cloud', 'asset', 'account', 'credential', 'tag', 'user'];
         checkAvailableAssets(asset, availableAssets=assets);
 
         let createEndpoint = `${apiUrl}/create_`;
