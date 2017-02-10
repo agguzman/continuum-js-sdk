@@ -1,7 +1,7 @@
 import getUrl from './getUrl';
 import axios from 'axios';
 import base64 from 'base-64'
-import availableAssetsOnMethod from './availableAssets'
+import availableAssetsOnMethods from './availableAssets'
 
 export default (host, port, protocol, token) => {
 
@@ -42,7 +42,7 @@ export default (host, port, protocol, token) => {
     };
 
     let expo = (asset, attributes) => {
-        checkAvailableAssets('export', asset, availableAssetsOnMethod['expo']);
+        checkAvailableAssets('export', asset, availableAssetsOnMethods['expo']);
         let exportEndpoint = `${apiUrl}/export_`;
         const expo = {
             pipeline() {
@@ -60,7 +60,7 @@ export default (host, port, protocol, token) => {
     };
 
     let read = (asset, attributes) => {
-        checkAvailableAssets('read', asset, availableAssetsOnMethod['read']);
+        checkAvailableAssets('read', asset, availableAssetsOnMethods['read']);
         // let listEndpoint = `${apiUrl}/list_`;
         let getEndpoint = `${apiUrl}/get_`;
 
@@ -113,7 +113,7 @@ export default (host, port, protocol, token) => {
     };
 
     let update = (asset, attributes) => {
-        checkAvailableAssets('update', asset, availableAssetsOnMethod['update']);
+        checkAvailableAssets('update', asset, availableAssetsOnMethods['update']);
         let updateEndpoint = `${apiUrl}/update_`;
 
         const update = {
@@ -146,7 +146,7 @@ export default (host, port, protocol, token) => {
     };
 
     let create = (asset, attributes) => {
-        checkAvailableAssets('create', asset, availableAssetsOnMethod['create']);
+        checkAvailableAssets('create', asset, availableAssetsOnMethods['create']);
         let createEndpoint = `${apiUrl}/create_`;
 
         const create = {
