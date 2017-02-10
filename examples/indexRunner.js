@@ -1,3 +1,5 @@
-import { createProject } from './createProject'
+import { getToken, createProject } from './sdkTester'
 
-createProject();
+// getToken();
+
+createProject('project1');
