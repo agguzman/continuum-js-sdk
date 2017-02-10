@@ -150,6 +150,7 @@ export default (host, port, protocol, token) => {
     };
 
     return {
-        create: create
+        create,
+        update,
     }
 }
