@@ -40,22 +40,18 @@ export default (host, port, protocol, token) => {
         let updateEndpoint = `${apiUrl}/update_`;
 
         const update = {
-            'cloud': () => {
+            cloud() {
                 const requiredParams = ['name'];
                 checkParams(asset, attributes, requiredParams);
 
-                body ={};
-                if (attributes.apiUrl) { body.apiurl = attributes.apiUrl }
-                //do this for remainging and check in creat where values are not required.
+                const body = Object.keys(attributes).reduce((acc, cur) => {
+                    if (attributes[cur]) { acc[cur] = attributes[cur] }
+                    return acc
+                }, {});
 
                 return {
-                    body: {
-                        apiurl: attributes.apiUrl,
-                        apiprotocol: attributes.apiProtocol,
-                        default_account: attributes.defaultAccount,
-                        ...attributes
-                    },
-                    endpoint: createEndpoint += asset
+                    body,
+                    endpoint: `${updateEndpoint}${asset}`
                 }
             },
             'user': () => {
