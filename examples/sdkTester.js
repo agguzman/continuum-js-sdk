@@ -2,9 +2,18 @@ import createSdk from './../dist/index';
 
 const sdk = createSdk("localhost", "8080", "http", "58741bdea64571262822d365");
 
-export const createProject = () => {
+export const getToken = () => {
+    sdk.read('token')
+    .then(function(response) {
+        console.log(response.data)
+    }).catch(function(error) {
+        console.log(error);
+    });
+};
+
+export const createProject = (name) => {
     sdk.create('project', {
-        name: 'project molly from sdk'
+        //name: `project ${name} from sdk`
     }).then(function(response) {
         console.log(response.data)
     }).catch(function(error) {
