@@ -13,7 +13,7 @@ export default (host, port, protocol, token) => {
     const headers = {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: auth == 'token' ? `Token ${token}` : `Basic ${basicEncoded}`
+        Authorization: auth === 'token' ? `Token ${token}` : `Basic ${basicEncoded}`
     };
 
     let ajax = axios.create({
