@@ -23,12 +23,11 @@ export default (host, port, protocol, token) => {
     };
 
     let checkParams = (asset, attributes, requiredParams) => {
-        let missingParams = [];
-        requiredParams.map((param) => {
-            if (!attributes.hasOwnProperty(param)) {
-                missingParams.push(param);
-            }
-        });
+
+        let missingParams = requiredParams.reduce((acc, cur) => {
+            if (!attributes.hasOwnProperty(cur)) { acc.push(cur) }
+            return acc
+        }, []);
         if (missingParams.length > 0) {
             let x = ['a', 'e', 'i', 'o', 'u'].includes(asset.charAt(0).toLowerCase()) ? 'an' : 'a';
             throw new Error(`Creating ${x} ${asset} requires ${missingParams}.`)
