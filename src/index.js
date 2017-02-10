@@ -41,15 +41,52 @@ export default (host, port, protocol, token) => {
     };
 
     let read = (asset, attributes) => {
-        const availableToRead = ['token'];
-        checkAvailableAssets('read', asset, availableToRead);
-        let listEndpoint = `${apiUrl}/list_`;
+        checkAvailableAssets('read', asset, availableAssetsOnMethod['read']);
+        // let listEndpoint = `${apiUrl}/list_`;
         let getEndpoint = `${apiUrl}/get_`;
 
         const read = {
+            __getPiRelated() {
+                const requiredParams = ['pi'];
+                checkParams(asset, attributes, requiredParams);
+                return { body: { ...attributes }, endpoint: `${getEndpoint}${asset}` }
+            },
             token() {
-                return { endpoint: `${getEndpoint}${asset}` }
-            }
+                return { body: {}, endpoint: `${getEndpoint}${asset}` }
+            },
+            system_log() {
+                return {
+                    body: { ...attributes },
+                    endpoint: `${getEndpoint}${asset}`
+                }
+            },
+            settings() {
+                return { body: { ...attributes }, endpoint: `${getEndpoint}${asset}` }
+            },
+            worklist() {
+                return { body: { ...attributes }, endpoint: `${getEndpoint}${asset}` }
+            },
+            pipeline() {
+                const requiredParams = ['pipeline'];
+                checkParams(asset, attributes, requiredParams);
+                return { body: { ...attributes }, endpoint: `${getEndpoint}${asset}` }
+            },
+            pipelineinstance() {
+                return this.__getPiRelated()
+            },
+            pi_workitems() {
+                return this.__getPiRelated()
+            },
+            pi_data() {
+                return this.__getPiRelated()
+            },
+            pi_changes() {
+                return this.__getPiRelated()
+            },
+            pi_artifacts() {
+                return this.__getPiRelated()
+            },
+
         };
 
         const request = read[asset]();
