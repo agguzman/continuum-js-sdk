@@ -41,6 +41,24 @@ export default (host, port, protocol, token) => {
         }
     };
 
+    let expo = (asset, attributes) => {
+        checkAvailableAssets('export', asset, availableAssetsOnMethod['expo']);
+        let exportEndpoint = `${apiUrl}/export_`;
+        const expo = {
+            pipeline() {
+                const requiredParams = ['pipeline'];
+                return { body: { ...attributes }, endpoint: `${exportEndpoint}${asset}` }
+            },
+            project() {
+                const requiredParams = ['project'];
+                return { body: { ...attributes }, endpoint: `${exportEndpoint}${asset}` }
+            },
+        };
+
+        const request = expo[asset]();
+        return ajax.post(request.endpoint, request.body);
+    };
+
     let read = (asset, attributes) => {
         checkAvailableAssets('read', asset, availableAssetsOnMethod['read']);
         // let listEndpoint = `${apiUrl}/list_`;
@@ -204,6 +222,7 @@ export default (host, port, protocol, token) => {
     return {
         create,
         update,
-        read
+        read,
+        expo
     }
 }
