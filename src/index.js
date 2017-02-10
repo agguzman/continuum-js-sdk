@@ -1,13 +1,19 @@
 import getUrl from './getUrl';
 import axios from 'axios';
+import base64 from 'base-64'
 
 export default (host, port, protocol, token) => {
+
     const baseUrl = getUrl(host, port, protocol);
     const apiUrl = `${baseUrl}/api`;
+    const username = 'Administrator';
+    const password = 'Password1';
+    const auth = 'not-token';
+    const basicEncoded = base64.encode(`${username}:${password}`);
     const headers = {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Token ${token}`
+        Authorization: auth == 'token' ? `Token ${token}` : `Basic ${basicEncoded}`
     };
 
     let ajax = axios.create({
@@ -32,6 +38,22 @@ export default (host, port, protocol, token) => {
             let x = ['a', 'e', 'i', 'o', 'u'].includes(asset.charAt(0).toLowerCase()) ? 'an' : 'a';
             throw new Error(`Creating ${x} ${asset} requires ${missingParams}.`)
         }
+    };
+
+    let read = (asset, attributes) => {
+        const availableToRead = ['token'];
+        checkAvailableAssets('read', asset, availableToRead);
+        let listEndpoint = `${apiUrl}/list_`;
+        let getEndpoint = `${apiUrl}/get_`;
+
+        const read = {
+            token() {
+                return { endpoint: `${getEndpoint}${asset}` }
+            }
+        };
+
+        const r = read[asset]();
+        return ajax.post(r.endpoint);
     };
 
     let update = (asset, attributes) => {
@@ -147,5 +169,6 @@ export default (host, port, protocol, token) => {
     return {
         create,
         update,
+        read
     }
 }
