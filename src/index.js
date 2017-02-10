@@ -59,7 +59,7 @@ export default (host, port, protocol, token) => {
                 checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes },
-                    endpoint: createEndpoint += asset
+                    endpoint: `${updateEndpoint}${asset}`
                 }
             }
         };
@@ -80,7 +80,7 @@ export default (host, port, protocol, token) => {
                 checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes },
-                    endpoint: createEndpoint += asset
+                    endpoint: `${createEndpoint}${asset}`
                 }
             },
             asset() {
@@ -88,7 +88,7 @@ export default (host, port, protocol, token) => {
                 checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes },
-                    endpoint: createEndpoint += asset
+                    endpoint: `${createEndpoint}${asset}`
                 }
             },
             cloud() {
@@ -100,7 +100,7 @@ export default (host, port, protocol, token) => {
                         apiprotocol: attributes.apiProtocol,
                         ...attributes
                     },
-                    endpoint: createEndpoint += asset
+                    endpoint: `${createEndpoint}${asset}`
                 }
             },
             account() {
@@ -111,7 +111,7 @@ export default (host, port, protocol, token) => {
                         default_cloud: attributes.defaultCloud,
                         ...attributes
                     },
-                    endpoint: createEndpoint += asset
+                    endpoint: `${createEndpoint}${asset}`
                 }
             },
             credential() {
@@ -119,7 +119,7 @@ export default (host, port, protocol, token) => {
                 checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes },
-                    endpoint: createEndpoint += asset
+                    endpoint: `${createEndpoint}${asset}`
                 }
             },
             tag() {
@@ -127,7 +127,7 @@ export default (host, port, protocol, token) => {
                 checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes },
-                    endpoint: createEndpoint += asset
+                    endpoint: `${createEndpoint}${asset}`
                 }
             },
             user() {
@@ -135,7 +135,7 @@ export default (host, port, protocol, token) => {
                 checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes },
-                    endpoint: createEndpoint += asset
+                    endpoint: `${createEndpoint}${asset}`
                 }
             }
         };
