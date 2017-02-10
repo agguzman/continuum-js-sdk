@@ -54,7 +54,7 @@ export default (host, port, protocol, token) => {
                     endpoint: `${updateEndpoint}${asset}`
                 }
             },
-            'user': () => {
+            user() {
                 const requiredParams = ['user'];
                 checkParams(asset, attributes, requiredParams);
                 return {
@@ -75,7 +75,7 @@ export default (host, port, protocol, token) => {
         let createEndpoint = `${apiUrl}/create_`;
 
         const create = {
-            'project': () => {
+            project() {
                 const requiredParams = ['name'];
                 checkParams(asset, attributes, requiredParams);
                 return {
@@ -83,7 +83,7 @@ export default (host, port, protocol, token) => {
                     endpoint: createEndpoint += asset
                 }
             },
-            'asset': () => {
+            asset() {
                 const requiredParams = ['name'];
                 checkParams(asset, attributes, requiredParams);
                 return {
@@ -91,7 +91,7 @@ export default (host, port, protocol, token) => {
                     endpoint: createEndpoint += asset
                 }
             },
-            'cloud': () => {
+            cloud() {
                 const requiredParams = ['name', 'provider', 'apiUrl', 'apiProtocol'];
                 checkParams(asset, attributes, requiredParams);
                 return {
@@ -103,7 +103,7 @@ export default (host, port, protocol, token) => {
                     endpoint: createEndpoint += asset
                 }
             },
-            'account': () => {
+            account() {
                 const requiredParams = ['name', 'provider', 'login', 'password', 'defaultCloud'];
                 checkParams(asset, attributes, requiredParams);
                 return {
@@ -114,7 +114,7 @@ export default (host, port, protocol, token) => {
                     endpoint: createEndpoint += asset
                 }
             },
-            'credential': () => {
+            credential() {
                 const requiredParams = ['name', 'username', 'password'];
                 checkParams(asset, attributes, requiredParams);
                 return {
@@ -122,7 +122,7 @@ export default (host, port, protocol, token) => {
                     endpoint: createEndpoint += asset
                 }
             },
-            'tag': () => {
+            tag() {
                 const requiredParams = ['name'];
                 checkParams(asset, attributes, requiredParams);
                 return {
@@ -130,7 +130,7 @@ export default (host, port, protocol, token) => {
                     endpoint: createEndpoint += asset
                 }
             },
-            'user': () => {
+            user() {
                 const requiredParams = ['user', 'name', 'role'];
                 checkParams(asset, attributes, requiredParams);
                 return {
