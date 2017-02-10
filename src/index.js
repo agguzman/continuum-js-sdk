@@ -52,8 +52,8 @@ export default (host, port, protocol, token) => {
             }
         };
 
-        const r = read[asset]();
-        return ajax.post(r.endpoint);
+        const request = read[asset]();
+        return ajax.post(request.endpoint, request.body);
     };
 
     let update = (asset, attributes) => {
@@ -86,8 +86,8 @@ export default (host, port, protocol, token) => {
             }
         };
 
-        const u = update[asset]();
-        return ajax.post(u.endpoint, u.body);
+        const request = update[asset]();
+        return ajax.post(request.endpoint, request.body);
     };
 
     let create = (asset, attributes) => {
@@ -162,8 +162,8 @@ export default (host, port, protocol, token) => {
             }
         };
 
-        const c = create[asset]();
-        return ajax.post(c.endpoint, c.body);
+        const request = create[asset]();
+        return ajax.post(request.endpoint, request.body);
     };
 
     return {
