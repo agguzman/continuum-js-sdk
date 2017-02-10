@@ -1,5 +1,11 @@
-import { getToken, createProject } from './sdkTester'
+import { piChanges, exportPipeline, getToken, createProject, createAccount, systemLog, settings, worklist, pipeline, pipelineInstance } from './sdkTester'
 
 // getToken();
 
-createProject('project1');
+// systemLog()
+
+piChanges()
+
+// createAccount('account1')
+
+//createProject('project1');

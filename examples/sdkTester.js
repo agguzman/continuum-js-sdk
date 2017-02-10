@@ -2,6 +2,64 @@ import createSdk from './../dist/index';
 
 const sdk = createSdk("localhost", "8080", "http", "58741bdea64571262822d365");
 
+
+export const pipelineInstance = () => {
+    sdk.read('pipelineinstance', {pi: '587be494a64571540b37810a'})
+        .then(function(response) {
+
+            console.log('type of phases', typeof(response.data.Response.phases))
+
+            console.dir(response.data, { depth: null})
+        }).catch(function(error) {
+        console.log(error);
+    });
+};
+
+export const piChanges = () => {
+    sdk.read('pi_changes', {pi: 'ebd636df'})
+        .then(function(response) {
+            console.log(response.data)
+        }).catch(function(error) {
+        console.log(error);
+    });
+};
+
+export const exportPipeline = () => {
+    sdk.expo('pipeline', {pipeline: 'Build'})
+        .then(function(response) {
+            console.dir(response.data, {depth: null})
+        }).catch(function(error) {
+        console.log(error);
+    });
+};
+
+export const worklist = () => {
+    sdk.read('worklist', {})
+        .then(function(response) {
+            console.log(response.data)
+        }).catch(function(error) {
+        console.log(error);
+    });
+};
+
+export const settings = () => {
+    sdk.read('settings', {})
+        .then(function(response) {
+            console.log(response.data)
+        }).catch(function(error) {
+        console.log(error);
+    });
+};
+
+export const systemLog = () => {
+    sdk.read('system_log', {})
+        .then(function(response) {
+            console.log(response.data)
+        }).catch(function(error) {
+        console.log(error);
+    });
+};
+
 export const getToken = () => {
     sdk.read('token')
     .then(function(response) {
@@ -35,7 +93,7 @@ export const createCloud = () => {
 };
 
 export const createAsset = () => {
-    sdk.create('project', {
+    sdk.create('asset', {
         name: 'project 1aaa from sdk'
     }).then(function(response) {
         console.log(response.data)
@@ -44,9 +102,9 @@ export const createAsset = () => {
     });
 };
 
-export const createAccount = () => {
-    sdk.create('project', {
-        name: 'account bank from sdk',
+export const createAccount = (name) => {
+    sdk.create('account', {
+        name: `account ${name} from sdk`,
         login: 'myLogin',
         password: 'myPassWord',
         provider: 'Azure',
@@ -59,7 +117,7 @@ export const createAccount = () => {
 };
 
 export const createTag = () => {
-    sdk.create('project', {
+    sdk.create('tag', {
         name: 'project 1aaa from sdk'
     }).then(function(response) {
         console.log(response.data)
@@ -69,7 +127,7 @@ export const createTag = () => {
 };
 
 export const createUser = () => {
-    sdk.create('project', {
+    sdk.create('user', {
         name: 'project 1aaa from sdk'
     }).then(function(response) {
         console.log(response.data)
@@ -79,7 +137,7 @@ export const createUser = () => {
 };
 
 export const createCredential = () => {
-    sdk.create('project', {
+    sdk.create('credential', {
         name: 'project 1aaa from sdk'
     }).then(function(response) {
         console.log(response.data)
