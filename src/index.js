@@ -16,9 +16,9 @@ export default (host, port, protocol, token) => {
         headers: headers
     });
 
-    let checkAvailableAssets = (asset, availableAssets=[]) => {
+    let checkAvailableAssets = (fn, asset, availableAssets=[]) => {
         if (!availableAssets.includes(asset.toLowerCase())) {
-            throw new Error(`Asset ${asset} not available to create.`)
+            throw new Error(`Asset ${asset} not available to ${fn}.`)
         }
     };
 
@@ -36,8 +36,8 @@ export default (host, port, protocol, token) => {
     };
 
     let update = (asset, attributes) => {
-        const asset = ['cloud', 'user'];
-        checkAvailableAssets(asset, availableAssets=assets);
+        const availableToUpdate = ['cloud', 'user'];
+        checkAvailableAssets('update', asset, availableToUpdate);
         let updateEndpoint = `${apiUrl}/update_`;
 
         const update = {
@@ -74,8 +74,8 @@ export default (host, port, protocol, token) => {
     };
 
     let create = (asset, attributes) => {
-        const assets = ['project', 'cloud', 'asset', 'account', 'credential', 'tag', 'user'];
-        checkAvailableAssets(asset, availableAssets=assets);
+        const availableToCreate = ['project', 'cloud', 'asset', 'account', 'credential', 'tag', 'user'];
+        checkAvailableAssets('create', asset, availableToCreate);
 
         let createEndpoint = `${apiUrl}/create_`;
 
