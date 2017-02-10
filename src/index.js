@@ -36,15 +36,40 @@ export default (host, port, protocol, token) => {
     };
 
     let update = (asset, attributes) => {
-        const asset = [''];
+        const asset = ['cloud', 'user'];
         checkAvailableAssets(asset, availableAssets=assets);
         let updateEndpoint = `${apiUrl}/update_`;
 
-        const updator = {
+        const update = {
+            'cloud': () => {
+                const requiredParams = ['name'];
+                checkParams(asset, attributes, requiredParams);
 
+                body ={};
+                if (attributes.apiUrl) { body.apiurl = attributes.apiUrl }
+                //do this for remainging and check in creat where values are not required.
+
+                return {
+                    body: {
+                        apiurl: attributes.apiUrl,
+                        apiprotocol: attributes.apiProtocol,
+                        default_account: attributes.defaultAccount,
+                        ...attributes
+                    },
+                    endpoint: createEndpoint += asset
+                }
+            },
+            'user': () => {
+                const requiredParams = ['user'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { ...attributes },
+                    endpoint: createEndpoint += asset
+                }
+            }
         };
 
-        const u = updator[asset]();
+        const u = update[asset]();
         return ajax.post(u.endpoint, u.body);
     };
 
@@ -54,7 +79,7 @@ export default (host, port, protocol, token) => {
 
         let createEndpoint = `${apiUrl}/create_`;
 
-        const creator = {
+        const create = {
             'project': () => {
                 const requiredParams = ['name'];
                 checkParams(asset, attributes, requiredParams);
@@ -120,7 +145,7 @@ export default (host, port, protocol, token) => {
             }
         };
 
-        const c = creator[asset]();
+        const c = create[asset]();
         return ajax.post(c.endpoint, c.body);
     };
 
