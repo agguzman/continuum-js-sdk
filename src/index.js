@@ -35,7 +35,7 @@ export default (host, port, protocol, token) => {
             return acc
         }, []);
         if (missingParams.length > 0) {
-            let x = ['a', 'e', 'i', 'o', 'u'].includes(asset.charAt(0).toLowerCase()) ? 'an' : 'a';
+            let x = [...'aeiou'].includes(asset.charAt(0).toLowerCase()) ? 'an' : 'a';
             throw new Error(`Creating ${x} ${asset} requires ${missingParams}.`)
         }
     };
