@@ -1,4 +1,4 @@
-import createSdk from './../dist/index';
+import createSdk from './../build/bundle';
 
 const sdk = createSdk("localhost", "8080", "http", "58741bdea64571262822d365");
 

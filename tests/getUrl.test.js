@@ -1,5 +1,5 @@
 import test from 'ava';
-import getUrl from './getUrl';
+import getUrl from '../src/getUrl';
 
 test('getUrl constructs the url in the format protocol://host:port', t => {
     const host = 'host';
