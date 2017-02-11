@@ -1,147 +1,24 @@
-import createSdk from './../build/bundle';
+import sdk, { jqueryConnector, axiosConnector } from './../src';
+import $ from 'jquery';
+import axios from 'axios'
 
-const sdk = createSdk("localhost", "8080", "http", "58741bdea64571262822d365");
+// jqueryConnector($) returns a function that accepts an sdk which is another function.
+// that sdk function accepts two parameters that are post and get functions
+const axiosConnected = axiosConnector(axios);
+
+const sdkConnected = axiosConnected(sdk);
+// sdkConnected is now a function that accepts a host, port and protocol
+
+const continuum = sdkConnected('localhost', 8080, 'http');
+// continuum is now an object with two properties that map to functions.
+// once these functions are called they invoke another function (handleRequest)
+// this invocation returns an object that has properties that map to other functions
+// these functions are the actions available, create, read, update, export, etc.
+// awesome
+let ctm = continuum.withCreds('Administrator', 'Password1'); // now these create, read, etc. are available.
+
+ctm.create('project', {name: 'project from modified sdk'})
+    .then(console.log)
+    .catch(console.log);
 
 
-export const pipelineInstance = () => {
-    sdk.read('pipelineinstance', {pi: '587be494a64571540b37810a'})
-        .then(function(response) {
-
-            console.log('type of phases', typeof(response.data.Response.phases))
-
-            console.dir(response.data, { depth: null})
-        }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const piChanges = () => {
-    sdk.read('pi_changes', {pi: 'ebd636df'})
-        .then(function(response) {
-            console.log(response.data)
-        }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const exportPipeline = () => {
-    sdk.expo('pipeline', {pipeline: 'Build'})
-        .then(function(response) {
-            console.dir(response.data, {depth: null})
-        }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const worklist = () => {
-    sdk.read('worklist', {})
-        .then(function(response) {
-            console.log(response.data)
-        }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const settings = () => {
-    sdk.read('settings', {})
-        .then(function(response) {
-            console.log(response.data)
-        }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const systemLog = () => {
-    sdk.read('system_log', {})
-        .then(function(response) {
-            console.log(response.data)
-        }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const getToken = () => {
-    sdk.read('token')
-    .then(function(response) {
-        console.log(response.data)
-    }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const createProject = (name) => {
-    sdk.create('project', {
-        //name: `project ${name} from sdk`
-    }).then(function(response) {
-        console.log(response.data)
-    }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const createCloud = () => {
-    sdk.create('cloud', {
-        name: 'cloud rainy from sdk',
-        provider: 'Amazon AWS',
-        apiUrl: 'localhost',
-        apiProtocol: 'https'
-    }).then(function(response) {
-        console.log(response.data)
-    }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const createAsset = () => {
-    sdk.create('asset', {
-        name: 'project 1aaa from sdk'
-    }).then(function(response) {
-        console.log(response.data)
-    }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const createAccount = (name) => {
-    sdk.create('account', {
-        name: `account ${name} from sdk`,
-        login: 'myLogin',
-        password: 'myPassWord',
-        provider: 'Azure',
-        defaultCloud: 'some nonexistant account'
-    }).then(function(response) {
-        console.log(response.data)
-    }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const createTag = () => {
-    sdk.create('tag', {
-        name: 'project 1aaa from sdk'
-    }).then(function(response) {
-        console.log(response.data)
-    }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const createUser = () => {
-    sdk.create('user', {
-        name: 'project 1aaa from sdk'
-    }).then(function(response) {
-        console.log(response.data)
-    }).catch(function(error) {
-        console.log(error);
-    });
-};
-
-export const createCredential = () => {
-    sdk.create('credential', {
-        name: 'project 1aaa from sdk'
-    }).then(function(response) {
-        console.log(response.data)
-    }).catch(function(error) {
-        console.log(error);
-    });
-};

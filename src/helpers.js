@@ -1,7 +1,3 @@
-export const getUrl = (host, port, protocol) => {
-    return `${protocol}://${host}:${port}`
-};
-
 
 export const checkAvailableAssets = (fn, asset, availableAssets=[]) => {
     if (!availableAssets.includes(asset.toLowerCase())) {

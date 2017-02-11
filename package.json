@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "env": "echo \"{\"username\": \"\"Administrator\"\", \"password\": \"administrator\", \"token\": \"123\"}\" > ./env",
     "test": "ava",
     "src": "babel src -d dist/src",
     "tests": "babel tests -d dist/test",
@@ -30,6 +31,7 @@
     "babel-preset-env": "^1.1.8",
     "base-64": "^0.1.0",
     "concurrently": "^3.1.0",
+    "jquery": "^3.1.1",
     "webpack": "^2.2.1"
   },
   "dependencies": {
