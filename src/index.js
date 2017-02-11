@@ -1,12 +1,16 @@
-import getUrl from './getUrl';
+import { getUrl, checkAvailableAssets, checkParams } from './helpers';
 import axios from 'axios';
 import base64 from 'base-64'
 import availableAssetsOnMethods from './availableAssets'
+
 
 export default (host, port, protocol, token) => {
 
     const baseUrl = getUrl(host, port, protocol);
     const apiUrl = `${baseUrl}/api`;
+
+
+
     const username = 'Administrator';
     const password = 'Password1';
     const auth = 'not-token';
@@ -22,24 +26,6 @@ export default (host, port, protocol, token) => {
         timeout: 1000,
         headers: headers
     });
-
-    let checkAvailableAssets = (fn, asset, availableAssets=[]) => {
-        if (!availableAssets.includes(asset.toLowerCase())) {
-            throw new Error(`Asset ${asset} not available to ${fn}.`)
-        }
-    };
-
-    let checkParams = (asset, attributes, requiredParams) => {
-
-        let missingParams = requiredParams.reduce((acc, cur) => {
-            if (!attributes.hasOwnProperty(cur)) { acc.push(cur) }
-            return acc
-        }, []);
-        if (missingParams.length > 0) {
-            let x = [...'aeiou'].includes(asset.charAt(0).toLowerCase()) ? 'an' : 'a';
-            throw new Error(`Creating ${x} ${asset} requires ${missingParams}.`)
-        }
-    };
 
     let expo = (asset, attributes) => {
         checkAvailableAssets('export', asset, availableAssetsOnMethods['expo']);
