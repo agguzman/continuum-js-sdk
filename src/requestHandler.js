@@ -267,6 +267,11 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         create,
         update,
         read,
-        expo
+        expo,
+        add,
+        initiate,
+        invoke,
+        promote,
+        retry
     }
 }
