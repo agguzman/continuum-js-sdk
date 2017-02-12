@@ -8,7 +8,7 @@ export default {
         'tag',
         'user'
     ],
-    read: [
+    get: [
         'token',
         'system_log',
         'settings',
@@ -42,5 +42,8 @@ export default {
     ],
     add: [
         'cloud_keypair'
+    ],
+    list: [
+        'assets'
     ]
 }

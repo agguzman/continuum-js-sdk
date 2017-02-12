@@ -17,6 +17,47 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     const headers = createHeaderObj(token, isBasic);
 
+    let list = (asset, attributes) => {
+        checkAvailableAssets('list', asset, availableAssetsOnMethods['list']);
+        const assets = {
+            assets() {
+                return {
+                    body: { ...attributes },
+                    endPoint: `${urls.list}${asset}` }
+            },
+            cloud_accounts() {
+                return {
+                    body: { ...attributes },
+                    endPoint: `${urls.list}${asset}` }
+            },
+            cloud_keypairs() {
+                const requiredParams = ['cloud'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { ...attributes },
+                    endPoint: `${urls.list}${asset}` }
+            },
+            cloud() {
+                return {
+                    body: { ...attributes },
+                    endPoint: `${urls.list}${asset}` }
+            },
+            credentials() {
+                return {
+                    body: { ...attributes },
+                    endPoint: `${urls.list}${asset}` }
+            },
+            tasks() {
+                return {
+                    body: { ...attributes },
+                    endPoint: `${urls.list}${asset}` }
+            }
+        };
+
+        const request = list[asset]();
+        return postFn(request.endPoint, request.body, headers);
+    };
+
     let add = (asset, attributes) => {
         checkAvailableAssets('add', asset, availableAssetsOnMethods['add']);
         const promote = {
@@ -115,34 +156,34 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         return postFn(request.endPoint, request.body, headers);
     };
 
-    const read = (asset, attributes) => {
-        checkAvailableAssets('read', asset, availableAssetsOnMethods['read']);
+    const get = (asset, attributes) => {
+        checkAvailableAssets('get', asset, availableAssetsOnMethods['get']);
 
         const read = {
             __getPiRelated() {
                 const requiredParams = ['pi'];
                 checkParams(asset, attributes, requiredParams);
-                return { body: { ...attributes }, endPoint: `${urls.read}${asset}` }
+                return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
             },
             token() {
-                return { body: {}, endPoint: `${urls.read}${asset}` }
+                return { body: {}, endPoint: `${urls.get}${asset}` }
             },
             system_log() {
                 return {
-                    body: { ...attributes }, endPoint: `${urls.read}${asset}`,
+                    body: { ...attributes }, endPoint: `${urls.get}${asset}`,
 
                 }
             },
             settings() {
-                return { body: { ...attributes }, endPoint: `${urls.read}${asset}` }
+                return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
             },
             worklist() {
-                return { body: { ...attributes }, endPoint: `${urls.read}${asset}` }
+                return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
             },
             pipeline() {
                 const requiredParams = ['pipeline'];
                 checkParams(asset, attributes, requiredParams);
-                return { body: { ...attributes }, endPoint: `${urls.read}${asset}` }
+                return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
             },
             pipelineinstance() {
                 return this.__getPiRelated()
