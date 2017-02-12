@@ -22,3 +22,15 @@ ctm.create('project', {name: 'project from modified sdk'})
     .catch(console.log);
 
 
+const axiosConnectedSdk = axiosConnector(axios)(sdk);
+// returns a function that accepts three params
+
+const ctm2 = axiosConnectedSdk('localhost', 8080, 'http').withCreds('Administrator', 'Password1');
+// 1st: returns an object with properties that are functions, creds or token
+// 2nd: returns an object with properties that are functions, actions
+
+ctm2.create('project', {name: 'project from modified sdk'})
+    .then(console.log)
+    .catch(console.log);
+
+
