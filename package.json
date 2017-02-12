@@ -6,10 +6,9 @@
   "scripts": {
     "env": "echo \"{\"username\": \"\"Administrator\"\", \"password\": \"administrator\", \"token\": \"123\"}\" > ./env",
     "test": "ava",
-    "src": "babel src -d dist/src",
-    "tests": "babel tests -d dist/test",
-    "examples": "babel examples -d dist/examples",
-    "all": "concurrently --kill-others \"npm run src\" \"npm run tests\" \"npm run examples\"",
+    "src": "babel src -d dist/src --ignore \"**/*.test.js\"",
+    "examples": "babel examples -d dist/examples --ignore \"**/*.test.js\"",
+    "all": "concurrently --kill-others \"npm run src\" \"npm run examples\"",
     "webpack": "webpack --progress --colors --watch",
     "webpack-no-watch": "webpack --progress --colors",
     "dev": "concurrently --kill-others \"npm run all\" \"npm run webpack-no-watch\""
