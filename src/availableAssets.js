@@ -44,6 +44,11 @@ export default {
         'cloud_keypair'
     ],
     list: [
-        'assets'
+        'assets',
+        'cloud_accounts',
+        'cloud_keypairs',
+        'cloud',
+        'credentials',
+        'tasks'
     ]
 }
