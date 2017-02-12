@@ -17,6 +17,85 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     const headers = createHeaderObj(token, isBasic);
 
+    let add = (asset, attributes) => {
+        checkAvailableAssets('add', asset, availableAssetsOnMethods['add']);
+        const promote = {
+            cloud_keypair() {
+                const requiredParams = ['cloud', 'name', 'privateKey'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { private_key: attributes.privateKey, ...attributes },
+                    endPoint: `${urls.add}${asset}` }
+            }
+        };
+
+        const request = add[asset]();
+        return postFn(request.endPoint, request.body, headers);
+    };
+
+    let retry = (asset, attributes) => {
+        checkAvailableAssets('retry', asset, availableAssetsOnMethods['retry']);
+        const promote = {
+            pipelineinstance() {
+                const requiredParams = ['pi'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { ...attributes },
+                    endPoint: `${urls.retry}${asset}` }
+            }
+        };
+
+        const request = retry[asset]();
+        return postFn(request.endPoint, request.body, headers);
+    };
+
+    let promote = (asset, attributes) => {
+        checkAvailableAssets('promote', asset, availableAssetsOnMethods['promote']);
+        const promote = {
+            revision() {
+                const requiredParams = ['package', 'revision', 'fullVersion', 'phase'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: {
+                        full_version: attributes.fullVersion,
+                        ...attributes
+                    },
+                    endPoint: `${urls.promote}${asset}` }
+            }
+        };
+
+        const request = promote[asset]();
+        return postFn(request.endPoint, request.body, headers);
+    };
+
+    let initiate = (asset, attributes) => {
+        checkAvailableAssets('initiate', asset, availableAssetsOnMethods['initiate']);
+        const initiate = {
+            pipeline() {
+                const requiredParams = ['definition', 'project', 'group'];
+                checkParams(asset, attributes, requiredParams);
+                return { body: { ...attributes }, endPoint: `${urls.initiate}${asset}` }
+            }
+        };
+
+        const request = initiate[asset]();
+        return postFn(request.endPoint, request.body, headers);
+    };
+
+    let invoke = (asset, attributes) => {
+        checkAvailableAssets('export', asset, availableAssetsOnMethods['invoke']);
+        const invoke = {
+            plugin() {
+                const requiredParams = ['plugin', 'method'];
+                checkParams(asset, attributes, requiredParams);
+                return { body: { ...attributes }, endPoint: `${urls.invoke}${asset}` }
+            }
+        };
+
+        const request = invoke[asset]();
+        return postFn(request.endPoint, request.body, headers);
+    };
+
     let expo = (asset, attributes) => {
         checkAvailableAssets('export', asset, availableAssetsOnMethods['expo']);
         const expo = {
@@ -118,7 +197,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let create = (asset, attributes) => {
-        console.log('asset from create function', asset)
+        console.log('asset from create function', asset);
         checkAvailableAssets('create', asset, availableAssetsOnMethods['create']);
 
         const create = {

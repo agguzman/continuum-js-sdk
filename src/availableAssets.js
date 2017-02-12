@@ -27,5 +27,20 @@ export default {
     expo: [
         'pipeline',
         'project'
+    ],
+    initiate: [
+        'pipeline'
+    ],
+    invoke: [
+        'plugin'
+    ],
+    promote: [
+        'revision'
+    ],
+    retry: [
+        'pipelineinstance'
+    ],
+    add: [
+        'cloud_keypair'
     ]
 }
