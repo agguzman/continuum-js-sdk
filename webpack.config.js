@@ -8,7 +8,9 @@ var config = {
     entry: APP_DIR,
     output: {
         path: BUILD_DIR,
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        library: ["CTM"],
+        libraryTarget: 'umd'
     },
     module: {
         loaders: [
