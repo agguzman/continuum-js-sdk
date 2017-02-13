@@ -60,7 +60,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     let add = (asset, attributes) => {
         checkAvailableAssets('add', asset, availableAssetsOnMethods['add']);
-        const promote = {
+        const add = {
             cloud_keypair() {
                 const requiredParams = ['cloud', 'name', 'privateKey'];
                 checkParams(asset, attributes, requiredParams);
@@ -76,7 +76,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     let retry = (asset, attributes) => {
         checkAvailableAssets('retry', asset, availableAssetsOnMethods['retry']);
-        const promote = {
+        const retry = {
             pipelineinstance() {
                 const requiredParams = ['pi'];
                 checkParams(asset, attributes, requiredParams);
