@@ -35,7 +35,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     let list = (asset, attributes) => {
         checkAvailableAssets('list', asset, availableAssetsOnMethods['list']);
-        const assets = {
+        const list = {
             assets() {
                 return {
                     body: { ...attributes },
