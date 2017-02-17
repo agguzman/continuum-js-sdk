@@ -17,6 +17,22 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     const headers = createHeaderObj(token, isBasic);
 
+    let impo = (asset, attributes) => {
+        checkAvailableAssets('impo', asset, availableAssetsOnMethods['impo']);
+        const add = {
+            pipeline() {
+                const requiredParams = ['backup'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { private_key: attributes.privateKey, ...attributes },
+                    endPoint: `${urls.impo}${asset}` }
+            }
+        };
+
+        const request = impo[asset]();
+        return postFn(request.endPoint, request.body, headers);
+    };
+
     let list = (asset, attributes) => {
         checkAvailableAssets('list', asset, availableAssetsOnMethods['list']);
         const assets = {
@@ -313,6 +329,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         initiate,
         invoke,
         promote,
-        retry
+        retry,
+        impo
     }
 }

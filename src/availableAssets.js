@@ -50,5 +50,8 @@ export default {
         'cloud',
         'credentials',
         'tasks'
+    ],
+    impo: [
+        'pipeline'
     ]
 }

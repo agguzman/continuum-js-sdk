@@ -10,7 +10,8 @@ export default (host, port, protocol) => {
         promote: `${apiUrl}/promote_`,
         retry: `${apiUrl}/retry_`,
         add: `${apiUrl}/add_`,
-        list: `${apiUrl}/list_`
+        list: `${apiUrl}/list_`,
+        impo: `${apiUrl}/import_`
     }
 }
 
