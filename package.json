@@ -4,6 +4,7 @@
   "description": "A Javascript SDK for VersionOne Continuum",
   "main": "index.js",
   "scripts": {
+    "pre": "babel src -d dist --ignore *.test.js",
     "build": "babel src -d dist/src",
     "examples": "babel examples -d dist/examples",
     "clean": "rm -rf dist",
