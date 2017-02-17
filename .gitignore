@@ -1,8 +1,6 @@
 node_modules/
-*.log
+examples/
 DS_Store
-.idea
-dist/
 build/
-examples/mine
-env
+*.log
+.idea
