@@ -4,5 +4,5 @@ DS_Store
 .idea
 dist/
 build/
-examples/
+examples/mine
 env
