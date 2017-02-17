@@ -1,6 +1,11 @@
+webpack.config.js
+dist/examples
 node_modules/
+.npmignore
+.gitignore
 examples/
+.babelrc
 DS_Store
 *.log
 .idea
-dist/
+src/
