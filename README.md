@@ -4,7 +4,6 @@ A Javascript SDK for VersionOne Continuum
 ### Clone from Github
 ```
 git clone https://github.com/agguzman/continuum-sdk
-npm install
 ```
 
 ### Install via NPM
@@ -26,5 +25,5 @@ const ctm = axiosConnectedSdk('localhost', 8080, 'http')
 
 ctm.create('project', {name: 'My First Project'})
     .then(response => console.log)
-    .catch(response => console.log);
+    .catch(error => console.log);
 ```
