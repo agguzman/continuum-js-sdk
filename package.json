@@ -1,16 +1,19 @@
 {
-  "name": "continuum-sdk",
+  "name": "ctm-sdk",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Javascript SDK for VersionOne Continuum",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "examples": "babel examples -d build",
-    "build": "webpack --progress --colors"
+    "build": "babel src -d dist/src",
+    "examples": "babel examples -d dist/examples",
+    "clean": "rm -rf dist",
+    "test": "jest"
   },
   "keywords": [
-    "continuum",
-    "sdk"
+    "VersionOne",
+    "V1",
+    "Continuum",
+    "SDK"
   ],
   "author": {
     "name": "Alejandro Guzman",
@@ -26,7 +29,6 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "ava": "^0.17.0",
     "axios": "^0.15.3",
     "babel-cli": "^6.22.2",
     "babel-jest": "^18.0.0",
