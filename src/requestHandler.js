@@ -175,7 +175,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     const get = (asset, attributes) => {
         checkAvailableAssets('get', asset, availableAssetsOnMethods['get']);
 
-        const read = {
+        const get = {
             __getPiRelated() {
                 const requiredParams = ['pi'];
                 checkParams(asset, attributes, requiredParams);
@@ -219,7 +219,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
         };
 
-        const request = read[asset]();
+        const request = get[asset]();
         return postFn(request.endPoint, request.body, headers);
     };
 
@@ -323,7 +323,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     return {
         create,
         update,
-        read,
+        get,
         expo,
         add,
         initiate,
