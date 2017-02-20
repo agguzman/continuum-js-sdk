@@ -4,10 +4,10 @@
   "description": "A Javascript SDK for VersionOne Continuum",
   "main": "index.js",
   "scripts": {
-    "pre": "babel src -d dist --ignore *.test.js",
     "build": "babel src -d dist/src",
-    "examples": "babel examples -d dist/examples",
     "clean": "rm -rf dist",
+    "examples": "babel examples -d dist/examples",
+    "pre": "babel src -d dist --ignore *.test.js",
     "test": "jest"
   },
   "keywords": [
@@ -33,7 +33,7 @@
     "axios": "^0.15.3",
     "babel-cli": "^6.22.2",
     "babel-jest": "^18.0.0",
-    "babel-loader": "^6.2.10",
+    "babel-loader": "^6.3.2",
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.1.8",
