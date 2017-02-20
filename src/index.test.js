@@ -1,6 +1,5 @@
-import test from 'ava';
-import sdk from './../dist/src'
+import sdk from './'
 
-test('sdk is a function constructor', t => {
-    t.true(typeof(sdk) === 'function')
+test('sdk is a function constructor', () => {
+    expect(typeof(sdk)).toBe('function')
 });
