@@ -83,6 +83,13 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
                 return {
                     body: { private_key: attributes.privateKey, ...attributes },
                     endPoint: `${urls.add}${asset}` }
+            },
+            object_tag() {
+                const requiredParams = ['tag', 'object_id', 'object_type'];
+                checkParams(asset, attributes, requiredParams);
+                return {
+                    body: { private_key: attributes.privateKey, ...attributes },
+                    endPoint: `${urls.add}${asset}` }
             }
         };
 

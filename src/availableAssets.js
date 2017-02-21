@@ -41,7 +41,8 @@ export default {
         'pipelineinstance'
     ],
     add: [
-        'cloud_keypair'
+        'cloud_keypair',
+        'object_tag'
     ],
     list: [
         'assets',
