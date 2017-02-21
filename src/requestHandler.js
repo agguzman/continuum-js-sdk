@@ -19,7 +19,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     let impo = (asset, attributes) => {
         checkAvailableAssets('impo', asset, availableAssetsOnMethods['impo']);
-        const add = {
+        const impo = {
             pipeline() {
                 const requiredParams = ['backup'];
                 checkParams(asset, attributes, requiredParams);
