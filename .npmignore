@@ -1,6 +1,4 @@
 webpack.config.js
-dist/examples
-node_modules/
 .npmignore
 .gitignore
 examples/
