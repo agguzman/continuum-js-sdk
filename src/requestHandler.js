@@ -17,221 +17,258 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     const headers = createHeaderObj(token, isBasic);
 
-    let impo = (asset, attributes) => {
-        checkAvailableAssets('impo', asset, availableAssets['impo']);
-        const requiredParams = availableAssets['impo'][asset];
-        checkParams(asset, attributes, requiredParams);
-
-        const impo = {
-            pipeline() {
-                return {
-                    body: { private_key: attributes.privateKey, ...attributes },
-                    endPoint: `${urls.impo}${asset}` }
-            }
-        };
-
-        const request = impo[asset]();
-        return postFn(request.endPoint, request.body, headers);
-    };
-
-    let list = (asset, attributes) => {
-        checkAvailableAssets('list', asset, availableAssets['list']);
-        const requiredParams = availableAssets['list'][asset];
-        checkParams(asset, attributes, requiredParams);
-        const list = {
-            assets() {
-                return {
-                    body: { ...attributes },
-                    endPoint: `${urls.list}${asset}` }
-            },
-            cloud_accounts() {
-                return {
-                    body: { ...attributes },
-                    endPoint: `${urls.list}${asset}` }
-            },
-            cloud_keypairs() {
-                return {
-                    body: { ...attributes },
-                    endPoint: `${urls.list}${asset}` }
-            },
-            cloud() {
-                return {
-                    body: { ...attributes },
-                    endPoint: `${urls.list}${asset}` }
-            },
-            credentials() {
-                return {
-                    body: { ...attributes },
-                    endPoint: `${urls.list}${asset}` }
-            },
-            tasks() {
-                return {
-                    body: { ...attributes },
-                    endPoint: `${urls.list}${asset}` }
-            }
-        };
-
-        const request = list[asset]();
-        return postFn(request.endPoint, request.body, headers);
-    };
-
     let add = (asset, attributes) => {
         checkAvailableAssets('add', asset, availableAssets['add']);
         const requiredParams = availableAssets['add'][asset];
         checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.add}${asset}`;
 
         const add = {
-            cloud_keypair() {
-                return {
-                    body: { private_key: attributes.privateKey, ...attributes },
-                    endPoint: `${urls.add}${asset}` }
+            cloud_keypair: {
+                body: {
+                    private_key: attributes.privateKey,
+                    ...attributes
+                }
             },
-            object_tag() {
-                return {
-                    body: { private_key: attributes.privateKey, ...attributes },
-                    endPoint: `${urls.add}${asset}` }
+            object_tag: {
+                body: {
+                    object_id: attributes.objectId,
+                    object_type: attributes.objectType,
+                    ...attributes
+                }
             }
         };
 
-        const request = add[asset]();
-        return postFn(request.endPoint, request.body, headers);
+        const request = add[asset];
+        return postFn(endPoint, request.body, headers);
     };
 
-    let retry = (asset, attributes) => {
-        checkAvailableAssets('retry', asset, availableAssets['retry']);
-        const requiredParams = availableAssets['retry'][asset];
+    let create = (asset, attributes) => {
+        checkAvailableAssets('create', asset, availableAssets['create']);
+        const requiredParams = availableAssets['create'][asset];
         checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.retry}${asset}`;
 
-        const retry = {
-            pipelineinstance() {
-                return {
-                    body: { ...attributes },
-                    endPoint: `${urls.retry}${asset}` }
+        const create = {
+            project: {
+                body: { ...attributes }
+            },
+            asset: {
+                body: { ...attributes }
+            },
+            cloud: {
+                body: {
+                    apiurl: attributes.apiUrl,
+                    apiprotocol: attributes.apiProtocol,
+                    ...attributes
+                }
+            },
+            account: {
+                body: {
+                    default_cloud: attributes.defaultCloud,
+                    ...attributes
+                }
+            },
+            credential: {
+                body: { ...attributes }
+            },
+            tag: {
+                body: { ...attributes }
+            },
+            user: {
+                body: { ...attributes }
             }
         };
 
-        const request = retry[asset]();
-        return postFn(request.endPoint, request.body, headers);
-    };
-
-    let promote = (asset, attributes) => {
-        checkAvailableAssets('promote', asset, availableAssets['promote']);
-        const requiredParams = availableAssets['promote'][asset];
-        checkParams(asset, attributes, requiredParams);
-
-        const promote = {
-            revision() {
-                return {
-                    body: {
-                        full_version: attributes.fullVersion,
-                        ...attributes
-                    },
-                    endPoint: `${urls.promote}${asset}` }
-            }
-        };
-
-        const request = promote[asset]();
-        return postFn(request.endPoint, request.body, headers);
-    };
-
-    let initiate = (asset, attributes) => {
-        checkAvailableAssets('initiate', asset, availableAssets['initiate']);
-        const requiredParams = availableAssets['initiate'][asset];
-        checkParams(asset, attributes, requiredParams);
-
-        const initiate = {
-            pipeline() {
-                return { body: { ...attributes }, endPoint: `${urls.initiate}${asset}` }
-            }
-        };
-
-        const request = initiate[asset]();
-        return postFn(request.endPoint, request.body, headers);
-    };
-
-    let invoke = (asset, attributes) => {
-        checkAvailableAssets('export', asset, availableAssets['invoke']);
-        const requiredParams = availableAssets['invoke'][asset];
-        checkParams(asset, attributes, requiredParams);
-
-        const invoke = {
-            plugin() {
-                return { body: { ...attributes }, endPoint: `${urls.invoke}${asset}` }
-            }
-        };
-
-        const request = invoke[asset]();
-        return postFn(request.endPoint, request.body, headers);
+        const request = create[asset];
+        return postFn(endPoint, request.body, headers);
     };
 
     let expo = (asset, attributes) => {
         checkAvailableAssets('export', asset, availableAssets['expo']);
         const requiredParams = availableAssets['expo'][asset];
         checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.expo}${asset}`;
 
         const expo = {
-            pipeline() {
-                return { body: { ...attributes }, endPoint: `${urls.expo}${asset}` }
+            pipeline: {
+                body: { ...attributes }
             },
-            project() {
-                return { body: { ...attributes }, endPoint: `${urls.expo}${asset}` }
-            },
+            project: {
+                body: { ...attributes }
+            }
         };
 
-        const request = expo[asset]();
-        return postFn(request.endPoint, request.body, headers);
+        const request = expo[asset];
+        return postFn(endPoint, request.body, headers);
     };
 
     const get = (asset, attributes) => {
         checkAvailableAssets('get', asset, availableAssets['get']);
         const requiredParams = availableAssets['get'][asset];
         checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.get}${asset}`;
 
         const get = {
-            __getPiRelated() {
-                return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
+            token: {
+                body: {}
             },
-            token() {
-                return { body: {}, endPoint: `${urls.get}${asset}` }
+            system_log: {
+                body: { ...attributes }
             },
-            system_log() {
-                return this.__getPiRelated()
+            settings: {
+                body: { ...attributes }
             },
-            settings() {
-                return this.__getPiRelated()
+            worklist: {
+                body: { ...attributes }
             },
-            worklist() {
-                return this.__getPiRelated()
+            pipeline: {
+                body: { ...attributes }
             },
-            pipeline() {
-                return this.__getPiRelated()
+            pipelineinstance: {
+                body: { ...attributes }
             },
-            pipelineinstance() {
-                return this.__getPiRelated()
+            pi_workitems: {
+                body: { ...attributes }
             },
-            pi_workitems() {
-                return this.__getPiRelated()
+            pi_data: {
+                body: { ...attributes }
             },
-            pi_data() {
-                return this.__getPiRelated()
+            pi_changes: {
+                body: { ...attributes }
             },
-            pi_changes() {
-                return this.__getPiRelated()
-            },
-            pi_artifacts() {
-                return this.__getPiRelated()
-            },
+            pi_artifacts: {
+                body: { ...attributes }
+            }
 
         };
 
-        const request = get[asset]();
-        return postFn(request.endPoint, request.body, headers);
+        const request = get[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
+    let impo = (asset, attributes) => {
+        checkAvailableAssets('impo', asset, availableAssets['impo']);
+        const requiredParams = availableAssets['impo'][asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.impo}${asset}`;
+
+        const impo = {
+            pipeline: {
+                body: {
+                    private_key: attributes.privateKey,
+                    ...attributes
+                }
+            }
+        };
+
+        const request = impo[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
+    let initiate = (asset, attributes) => {
+        checkAvailableAssets('initiate', asset, availableAssets['initiate']);
+        const requiredParams = availableAssets['initiate'][asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.initiate}${asset}`;
+
+        const initiate = {
+            pipeline: {
+                body: {...attributes }
+            }
+        };
+
+        const request = initiate[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
+    let invoke = (asset, attributes) => {
+        checkAvailableAssets('export', asset, availableAssets['invoke']);
+        const requiredParams = availableAssets['invoke'][asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.invoke}${asset}`;
+
+        const invoke = {
+            plugin: {
+                body: { ...attributes }
+            }
+        };
+
+        const request = invoke[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
+    let list = (asset, attributes) => {
+        checkAvailableAssets('list', asset, availableAssets['list']);
+        const requiredParams = availableAssets['list'][asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.list}${asset}`;
+
+        const list = {
+            assets: {
+                body: { ...attributes }
+            },
+            cloud_accounts: {
+                    body: { ...attributes }
+            },
+            cloud_keypairs: {
+                    body: { ...attributes }
+            },
+            cloud: {
+                    body: { ...attributes }
+            },
+            credentials: {
+                    body: { ...attributes }
+            },
+            tasks: {
+                    body: { ...attributes }
+            }
+        };
+
+        const request = list[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
+    let promote = (asset, attributes) => {
+        checkAvailableAssets('promote', asset, availableAssets['promote']);
+        const requiredParams = availableAssets['promote'][asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.promote}${asset}`;
+
+        const promote = {
+            revision: {
+                body: {
+                    full_version: attributes.fullVersion,
+                    ...attributes
+                }
+            }
+        };
+
+        const request = promote[asset]();
+        return postFn(endPoint, request.body, headers);
+    };
+
+    let retry = (asset, attributes) => {
+        checkAvailableAssets('retry', asset, availableAssets['retry']);
+        const requiredParams = availableAssets['retry'][asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.retry}${asset}`;
+
+        const retry = {
+            pipelineinstance: {
+                body: { ...attributes }
+            }
+        };
+
+        const request = retry[asset];
+        return postFn(endPoint, request.body, headers);
     };
 
     let update = (asset, attributes) => {
         checkAvailableAssets('update', asset, availableAssets['update']);
         const requiredParams = availableAssets['update'][asset];
         checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.retry}${asset}`;
 
         const update = {
             cloud() {
@@ -252,73 +289,20 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         };
 
         const request = update[asset]();
-        return postFn(request.endPoint, request.body, headers);
-    };
-
-    let create = (asset, attributes) => {
-        checkAvailableAssets('create', asset, availableAssets['create']);
-        const requiredParams = availableAssets['create'][asset];
-        checkParams(asset, attributes, requiredParams);
-
-        const create = {
-            project() {
-                return {
-                    body: { ...attributes } , endPoint: `${urls.create}${asset}`
-                }
-            },
-            asset() {
-                return {
-                    body: { ...attributes }, endPoint: `${urls.create}${asset}`
-                }
-            },
-            cloud() {
-                return {
-                    body: {
-                        apiurl: attributes.apiUrl,
-                        apiprotocol: attributes.apiProtocol,
-                        ...attributes
-                    }, endPoint: `${urls.create}${asset}`
-                }
-            },
-            account() {
-                return {
-                    body: {
-                        default_cloud: attributes.defaultCloud,
-                        ...attributes
-                    }, endPoint: `${urls.create}${asset}`
-                }
-            },
-            credential() {
-                return {
-                    body: { ...attributes }, endPoint: `${urls.create}${asset}`
-                }
-            },
-            tag() {
-                return {
-                    body: { ...attributes }, endPoint: `${urls.create}${asset}`
-                }
-            },
-            user() {
-                return {
-                    body: { ...attributes }, endPoint: `${urls.create}${asset}`
-                }
-            }
-        };
-
-        const request = create[asset]();
-        return postFn(request.endPoint, request.body, headers);
+        return postFn(endPoint, request.body, headers);
     };
 
     return {
-        create,
-        update,
-        get,
-        expo,
         add,
+        create,
+        expo,
+        get,
+        impo,
         initiate,
+        list,
         invoke,
         promote,
         retry,
-        impo
+        update
     }
 }
