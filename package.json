@@ -4,10 +4,10 @@
   "description": "A Javascript SDK for VersionOne Continuum",
   "main": "index.js",
   "scripts": {
-    "build": "babel src -d dist/src",
-    "clean": "rm -rf dist",
-    "examples": "babel examples -d dist/examples",
-    "pre": "babel src -d dist --ignore *.test.js",
+    "build": "webpack --config ./webpack.config.js",
+    "build:prod": "webpack --config ./webpack.config.js -p",
+    "clean:dist": "rm -rf dist",
+    "clean:modules": "rm -rf node_modules",
     "test": "jest"
   },
   "keywords": [
