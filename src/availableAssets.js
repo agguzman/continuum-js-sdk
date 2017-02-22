@@ -3,6 +3,8 @@ export default {
         cloud_keypair: ['cloud', 'name', 'privateKey'],
            object_tag: ['tag', 'objectId', 'objectType']
     },
+    associate: {
+        commits_to_v1_workitem: ['commitsShas', 'associatedBy', 'workitemNumber', 'instanceUrl']
     },
     cancel: {
         pipelineinstance: ['pi']
@@ -52,8 +54,14 @@ export default {
     promote: {
         revision: ['package', 'revision', 'fullVersion', 'phase']
     },
+    remove: {
+        object_tag: ['tag', 'objectId', 'objectType']
+    },
     retry: {
         pipelineinstance: ['pi']
+    },
+    run: {
+        metric: ['module', 'metric']
     },
     update: {
         cloud: ['name'],

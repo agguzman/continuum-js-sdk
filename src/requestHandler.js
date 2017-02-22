@@ -43,6 +43,27 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         return postFn(endPoint, request.body, headers);
     };
 
+    let associate = (asset, attributes) => {
+        checkAvailableAssets('export', asset, availableAssets.associate);
+        const requiredParams = availableAssets.associate[asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.associate}${asset}`;
+
+        const associate = {
+            commits_to_v1_workitem: {
+                body: {
+                    commit_shas: attributes.commitShas,
+                    associated_by: attributes.associatedBy,
+                    workitem_number: attributes.workitemNumber,
+                    instance_url: attributes.instanceUrl
+                }
+            }
+        };
+
+        const request = associate[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
     let cancel = (asset, attributes) => {
         checkAvailableAssets('cancel', asset, availableAssets.cancel);
         const requiredParams = availableAssets.cancel[asset];
@@ -264,6 +285,26 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         return postFn(endPoint, request.body, headers);
     };
 
+    let remove = (asset, attributes) => {
+        checkAvailableAssets('retry', asset, availableAssets.remove);
+        const requiredParams = availableAssets.remove[asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.remove}${asset}`;
+
+        const remove = {
+            object_tag: {
+                body: {
+                    object_id: attributes.objectId,
+                    object_type: attributes.objectType,
+                    ...attributes
+                }
+            }
+        };
+
+        const request = remove[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
     let retry = (asset, attributes) => {
         checkAvailableAssets('retry', asset, availableAssets.retry);
         const requiredParams = availableAssets.retry[asset];
@@ -277,6 +318,22 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         };
 
         const request = retry[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
+    let run = (asset, attributes) => {
+        checkAvailableAssets('run', asset, availableAssets.run);
+        const requiredParams = availableAssets.run[asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.run}${asset}`;
+
+        const run = {
+            pipelineinstance: {
+                body: { ...attributes }
+            }
+        };
+
+        const request = run[asset];
         return postFn(endPoint, request.body, headers);
     };
 
@@ -308,6 +365,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     return {
         add,
+        associate,
         cancel,
         create,
         expo,
@@ -317,7 +375,9 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         list,
         invoke,
         promote,
+        remove,
         retry,
+        run,
         update
     }
 }

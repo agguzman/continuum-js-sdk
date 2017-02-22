@@ -9,6 +9,11 @@ test('getUrl constructs an object with add action', () => {
     expect(actual.hasOwnProperty('add')).toBe(true);
 });
 
+test('getUrl constructs an object with associate action', () => {
+    const actual = getUrls(host, port, protocol);
+    expect(actual.hasOwnProperty('associate')).toBe(true);
+});
+
 test('getUrl constructs an object with cancel action', () => {
     const actual = getUrls(host, port, protocol);
     expect(actual['cancel']).toBeTruthy();
@@ -54,9 +59,19 @@ test('getUrl constructs an object with promote action', () => {
     expect(actual.hasOwnProperty('promote')).toBe(true);
 });
 
+test('getUrl constructs an object with remove action', () => {
+    const actual = getUrls(host, port, protocol);
+    expect(actual.hasOwnProperty('remove')).toBe(true);
+});
+
 test('getUrl constructs an object with retry action', () => {
     const actual = getUrls(host, port, protocol);
     expect(actual.hasOwnProperty('retry')).toBe(true);
+});
+
+test('getUrl constructs an object with run action', () => {
+    const actual = getUrls(host, port, protocol);
+    expect(actual.hasOwnProperty('run')).toBe(true);
 });
 
 test('getUrl constructs an object with update action', () => {
