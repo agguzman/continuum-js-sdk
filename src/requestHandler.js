@@ -43,6 +43,22 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         return postFn(endPoint, request.body, headers);
     };
 
+    let cancel = (asset, attributes) => {
+        checkAvailableAssets('cancel', asset, availableAssets.cancel);
+        const requiredParams = availableAssets.cancel[asset];
+        checkParams(asset, attributes, requiredParams);
+        const endPoint = `${urls.cancel}${asset}`;
+
+        const cancel = {
+            pipelineinstance: {
+                body: { ...attributes }
+            }
+        };
+
+        const request = cancel[asset];
+        return postFn(endPoint, request.body, headers);
+    };
+
     let create = (asset, attributes) => {
         checkAvailableAssets('create', asset, availableAssets.create);
         const requiredParams = availableAssets.create[asset];
@@ -174,7 +190,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
         const initiate = {
             pipeline: {
-                body: {...attributes }
+                body: { ...attributes }
             }
         };
 
@@ -292,6 +308,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     return {
         add,
+        cancel,
         create,
         expo,
         get,

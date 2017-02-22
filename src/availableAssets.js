@@ -3,6 +3,9 @@ export default {
         cloud_keypair: ['cloud', 'name', 'privateKey'],
            object_tag: ['tag', 'object_id', 'object_type']
     },
+    cancel: {
+        pipelineinstance: ['pi']
+    },
     create: {
            project: ['name'],
              cloud: ['name', 'provider', 'apiUrl', 'apiProtocol'],
