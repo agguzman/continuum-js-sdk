@@ -344,22 +344,18 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.update}${asset}`;
 
         const update = {
-            cloud() {
-                const body = Object.keys(attributes).reduce((acc, cur) => {
+            cloud: {
+                body: Object.keys(attributes).reduce((acc, cur) => {
                     if (attributes[cur]) { acc[cur] = attributes[cur] }
                     return acc
-                }, {});
-
-                return { body }
+                }, {})
             },
-            user() {
-                return {
-                    body: { ...attributes }
-                }
+            user: {
+                body: { ...attributes }
             }
         };
 
-        const request = update[asset]();
+        const request = update[asset];
         return postFn(endPoint, request.body, headers);
     };
 
