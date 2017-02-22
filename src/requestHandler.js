@@ -17,6 +17,10 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
 
     const headers = createHeaderObj(token, isBasic);
 
+    const defaultBody = (attributes) => ({
+        body: { ...attributes }
+    });
+
     let add = (asset, attributes) => {
         checkAvailableAssets('add', asset, availableAssets.add);
         const requiredParams = availableAssets.add[asset];
@@ -71,9 +75,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.cancel}${asset}`;
 
         const cancel = {
-            pipelineinstance: {
-                body: { ...attributes }
-            }
+            pipelineinstance: defaultBody(attributes)
         };
 
         const request = cancel[asset];
@@ -87,12 +89,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.create}${asset}`;
 
         const create = {
-            project: {
-                body: { ...attributes }
-            },
-            asset: {
-                body: { ...attributes }
-            },
+            project: defaultBody(attributes),
+            asset: defaultBody(attributes),
             cloud: {
                 body: {
                     apiurl: attributes.apiUrl,
@@ -106,15 +104,9 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
                     ...attributes
                 }
             },
-            credential: {
-                body: { ...attributes }
-            },
-            tag: {
-                body: { ...attributes }
-            },
-            user: {
-                body: { ...attributes }
-            }
+            credential: defaultBody(attributes),
+            tag: defaultBody(attributes),
+            user: defaultBody(attributes)
         };
 
         const request = create[asset];
@@ -128,12 +120,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.expo}${asset}`;
 
         const expo = {
-            pipeline: {
-                body: { ...attributes }
-            },
-            project: {
-                body: { ...attributes }
-            }
+            pipeline: defaultBody(attributes),
+            project: defaultBody(attributes)
         };
 
         const request = expo[asset];
@@ -147,36 +135,16 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.get}${asset}`;
 
         const get = {
-            token: {
-                body: {}
-            },
-            system_log: {
-                body: { ...attributes }
-            },
-            settings: {
-                body: { ...attributes }
-            },
-            worklist: {
-                body: { ...attributes }
-            },
-            pipeline: {
-                body: { ...attributes }
-            },
-            pipelineinstance: {
-                body: { ...attributes }
-            },
-            pi_workitems: {
-                body: { ...attributes }
-            },
-            pi_data: {
-                body: { ...attributes }
-            },
-            pi_changes: {
-                body: { ...attributes }
-            },
-            pi_artifacts: {
-                body: { ...attributes }
-            }
+            token: defaultBody(attributes),
+            system_log: defaultBody(attributes),
+            settings: defaultBody(attributes),
+            worklist: defaultBody(attributes),
+            pipeline: defaultBody(attributes),
+            pipelineinstance: defaultBody(attributes),
+            pi_workitems: defaultBody(attributes),
+            pi_data: defaultBody(attributes),
+            pi_changes: defaultBody(attributes),
+            pi_artifacts: defaultBody(attributes)
 
         };
 
@@ -210,9 +178,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.initiate}${asset}`;
 
         const initiate = {
-            pipeline: {
-                body: { ...attributes }
-            }
+            pipeline: defaultBody(attributes)
         };
 
         const request = initiate[asset];
@@ -226,9 +192,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.invoke}${asset}`;
 
         const invoke = {
-            plugin: {
-                body: { ...attributes }
-            }
+            plugin: defaultBody(attributes)
         };
 
         const request = invoke[asset];
@@ -242,24 +206,12 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.list}${asset}`;
 
         const list = {
-            assets: {
-                body: { ...attributes }
-            },
-            cloud_accounts: {
-                    body: { ...attributes }
-            },
-            cloud_keypairs: {
-                    body: { ...attributes }
-            },
-            cloud: {
-                    body: { ...attributes }
-            },
-            credentials: {
-                    body: { ...attributes }
-            },
-            tasks: {
-                    body: { ...attributes }
-            }
+            assets: defaultBody(attributes),
+            cloud_accounts: defaultBody(attributes),
+            cloud_keypairs: defaultBody(attributes),
+            cloud: defaultBody(attributes),
+            credentials: defaultBody(attributes),
+            tasks: defaultBody(attributes)
         };
 
         const request = list[asset];
@@ -312,9 +264,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.retry}${asset}`;
 
         const retry = {
-            pipelineinstance: {
-                body: { ...attributes }
-            }
+            pipelineinstance: defaultBody(attributes)
         };
 
         const request = retry[asset];
@@ -328,9 +278,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
         const endPoint = `${urls.run}${asset}`;
 
         const run = {
-            pipelineinstance: {
-                body: { ...attributes }
-            }
+            pipelineinstance: defaultBody(attributes)
         };
 
         const request = run[asset];
@@ -350,9 +298,7 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
                     return acc
                 }, {})
             },
-            user: {
-                body: { ...attributes }
-            }
+            user: defaultBody(attributes)
         };
 
         const request = update[asset];
