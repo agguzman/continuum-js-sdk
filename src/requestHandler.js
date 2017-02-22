@@ -18,8 +18,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     const headers = createHeaderObj(token, isBasic);
 
     let add = (asset, attributes) => {
-        checkAvailableAssets('add', asset, availableAssets['add']);
-        const requiredParams = availableAssets['add'][asset];
+        checkAvailableAssets('add', asset, availableAssets.add);
+        const requiredParams = availableAssets.add[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.add}${asset}`;
 
@@ -44,10 +44,10 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let create = (asset, attributes) => {
-        checkAvailableAssets('create', asset, availableAssets['create']);
-        const requiredParams = availableAssets['create'][asset];
+        checkAvailableAssets('create', asset, availableAssets.create);
+        const requiredParams = availableAssets.create[asset];
         checkParams(asset, attributes, requiredParams);
-        const endPoint = `${urls.retry}${asset}`;
+        const endPoint = `${urls.create}${asset}`;
 
         const create = {
             project: {
@@ -85,8 +85,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let expo = (asset, attributes) => {
-        checkAvailableAssets('export', asset, availableAssets['expo']);
-        const requiredParams = availableAssets['expo'][asset];
+        checkAvailableAssets('export', asset, availableAssets.expo);
+        const requiredParams = availableAssets.expo[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.expo}${asset}`;
 
@@ -104,8 +104,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     const get = (asset, attributes) => {
-        checkAvailableAssets('get', asset, availableAssets['get']);
-        const requiredParams = availableAssets['get'][asset];
+        checkAvailableAssets('get', asset, availableAssets.get);
+        const requiredParams = availableAssets.get[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.get}${asset}`;
 
@@ -148,8 +148,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let impo = (asset, attributes) => {
-        checkAvailableAssets('impo', asset, availableAssets['impo']);
-        const requiredParams = availableAssets['impo'][asset];
+        checkAvailableAssets('impo', asset, availableAssets.impo);
+        const requiredParams = availableAssets.impo[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.impo}${asset}`;
 
@@ -167,8 +167,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let initiate = (asset, attributes) => {
-        checkAvailableAssets('initiate', asset, availableAssets['initiate']);
-        const requiredParams = availableAssets['initiate'][asset];
+        checkAvailableAssets('initiate', asset, availableAssets.initiate);
+        const requiredParams = availableAssets.initiate[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.initiate}${asset}`;
 
@@ -183,8 +183,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let invoke = (asset, attributes) => {
-        checkAvailableAssets('export', asset, availableAssets['invoke']);
-        const requiredParams = availableAssets['invoke'][asset];
+        checkAvailableAssets('export', asset, availableAssets.invoke);
+        const requiredParams = availableAssets.invoke[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.invoke}${asset}`;
 
@@ -199,8 +199,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let list = (asset, attributes) => {
-        checkAvailableAssets('list', asset, availableAssets['list']);
-        const requiredParams = availableAssets['list'][asset];
+        checkAvailableAssets('list', asset, availableAssets.list);
+        const requiredParams = availableAssets.list[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.list}${asset}`;
 
@@ -230,8 +230,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let promote = (asset, attributes) => {
-        checkAvailableAssets('promote', asset, availableAssets['promote']);
-        const requiredParams = availableAssets['promote'][asset];
+        checkAvailableAssets('promote', asset, availableAssets.promote);
+        const requiredParams = availableAssets.promote[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.promote}${asset}`;
 
@@ -249,8 +249,8 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let retry = (asset, attributes) => {
-        checkAvailableAssets('retry', asset, availableAssets['retry']);
-        const requiredParams = availableAssets['retry'][asset];
+        checkAvailableAssets('retry', asset, availableAssets.retry);
+        const requiredParams = availableAssets.retry[asset];
         checkParams(asset, attributes, requiredParams);
         const endPoint = `${urls.retry}${asset}`;
 
@@ -265,10 +265,10 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let update = (asset, attributes) => {
-        checkAvailableAssets('update', asset, availableAssets['update']);
-        const requiredParams = availableAssets['update'][asset];
+        checkAvailableAssets('update', asset, availableAssets.update);
+        const requiredParams = availableAssets.update[asset];
         checkParams(asset, attributes, requiredParams);
-        const endPoint = `${urls.retry}${asset}`;
+        const endPoint = `${urls.update}${asset}`;
 
         const update = {
             cloud() {
