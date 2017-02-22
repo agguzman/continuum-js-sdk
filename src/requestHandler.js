@@ -277,13 +277,11 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
                     return acc
                 }, {});
 
-                return {
-                    body, endPoint: `${urls.update}${asset}`
-                }
+                return { body }
             },
             user() {
                 return {
-                    body: { ...attributes }, endPoint: `${urls.update}${asset}`
+                    body: { ...attributes }
                 }
             }
         };
