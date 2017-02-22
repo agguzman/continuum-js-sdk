@@ -1,7 +1,8 @@
 export default {
     add: {
         cloud_keypair: ['cloud', 'name', 'privateKey'],
-           object_tag: ['tag', 'object_id', 'object_type']
+           object_tag: ['tag', 'objectId', 'objectType']
+    },
     },
     cancel: {
         pipelineinstance: ['pi']
