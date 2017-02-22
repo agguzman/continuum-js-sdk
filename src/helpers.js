@@ -15,4 +15,5 @@ export const checkParams = (asset, attributes, requiredParams) => {
         let x = [...'aeiou'].includes(asset.charAt(0).toLowerCase()) ? 'an' : 'a';
         throw new Error(`Creating ${x} ${asset} requires ${missingParams}.`)
     }
+    return true;
 };
