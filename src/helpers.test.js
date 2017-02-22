@@ -20,16 +20,16 @@ test('Attributes specified are missing in the required parameters list', () => {
 });
 
 test('Asset should be included in the list of available assets', () => {
-    const availableAssets = ['a', 'b', 'c', 'd'];
-    const actual = checkAvailableAssets('fn', 'A', availableAssets);
+    const availableAssets = { asset1: 'a', asset2: 'b', asset3: 'c' };
+    const actual = checkAvailableAssets('fn', 'ASSET3', availableAssets);
     expect(actual).toBe(true);
 });
 
 test('If asset is not included in the list of available assets, then an error is thrown', () => {
-    const availableAssets = ['a', 'b', 'c', 'd'];
+    const availableAssets = { asset1: 'a', asset2: 'b', asset3: 'c' };
     let actual;
     try {
-        actual = checkAvailableAssets('fn', 'E', availableAssets);
+        actual = checkAvailableAssets('fn', 'not-asset', availableAssets);
     } catch(err){}
 
     expect(actual).toThrow();
