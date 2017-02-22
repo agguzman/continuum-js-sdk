@@ -14,7 +14,7 @@ npm install continuum-sdk
 
 ### Axios example
 ```javascript
-import sdk, { axiosConnector } from 'continuum-sdk';
+import sdk, { axiosConnector } from 'continuum-sdk/dist';
 import axios from 'axios';
  
 const axiosConnectedSdk = axiosConnector(axios)(sdk);
