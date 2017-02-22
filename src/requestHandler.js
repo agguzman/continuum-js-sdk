@@ -1,5 +1,5 @@
 import getUrls from './getUrls'
-import availableAssetsOnMethods from './availableAssets'
+import availableAssets from './availableAssets'
 import { checkParams, checkAvailableAssets } from './helpers'
 
 
@@ -18,11 +18,12 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     const headers = createHeaderObj(token, isBasic);
 
     let impo = (asset, attributes) => {
-        checkAvailableAssets('impo', asset, availableAssetsOnMethods['impo']);
+        checkAvailableAssets('impo', asset, availableAssets['impo']);
+        const requiredParams = availableAssets['impo'][asset];
+        checkParams(asset, attributes, requiredParams);
+
         const impo = {
             pipeline() {
-                const requiredParams = ['backup'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { private_key: attributes.privateKey, ...attributes },
                     endPoint: `${urls.impo}${asset}` }
@@ -34,7 +35,9 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let list = (asset, attributes) => {
-        checkAvailableAssets('list', asset, availableAssetsOnMethods['list']);
+        checkAvailableAssets('list', asset, availableAssets['list']);
+        const requiredParams = availableAssets['list'][asset];
+        checkParams(asset, attributes, requiredParams);
         const list = {
             assets() {
                 return {
@@ -47,8 +50,6 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
                     endPoint: `${urls.list}${asset}` }
             },
             cloud_keypairs() {
-                const requiredParams = ['cloud'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes },
                     endPoint: `${urls.list}${asset}` }
@@ -75,18 +76,17 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let add = (asset, attributes) => {
-        checkAvailableAssets('add', asset, availableAssetsOnMethods['add']);
+        checkAvailableAssets('add', asset, availableAssets['add']);
+        const requiredParams = availableAssets['add'][asset];
+        checkParams(asset, attributes, requiredParams);
+
         const add = {
             cloud_keypair() {
-                const requiredParams = ['cloud', 'name', 'privateKey'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { private_key: attributes.privateKey, ...attributes },
                     endPoint: `${urls.add}${asset}` }
             },
             object_tag() {
-                const requiredParams = ['tag', 'object_id', 'object_type'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { private_key: attributes.privateKey, ...attributes },
                     endPoint: `${urls.add}${asset}` }
@@ -98,11 +98,12 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let retry = (asset, attributes) => {
-        checkAvailableAssets('retry', asset, availableAssetsOnMethods['retry']);
+        checkAvailableAssets('retry', asset, availableAssets['retry']);
+        const requiredParams = availableAssets['retry'][asset];
+        checkParams(asset, attributes, requiredParams);
+
         const retry = {
             pipelineinstance() {
-                const requiredParams = ['pi'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes },
                     endPoint: `${urls.retry}${asset}` }
@@ -114,11 +115,12 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let promote = (asset, attributes) => {
-        checkAvailableAssets('promote', asset, availableAssetsOnMethods['promote']);
+        checkAvailableAssets('promote', asset, availableAssets['promote']);
+        const requiredParams = availableAssets['promote'][asset];
+        checkParams(asset, attributes, requiredParams);
+
         const promote = {
             revision() {
-                const requiredParams = ['package', 'revision', 'fullVersion', 'phase'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: {
                         full_version: attributes.fullVersion,
@@ -133,11 +135,12 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let initiate = (asset, attributes) => {
-        checkAvailableAssets('initiate', asset, availableAssetsOnMethods['initiate']);
+        checkAvailableAssets('initiate', asset, availableAssets['initiate']);
+        const requiredParams = availableAssets['initiate'][asset];
+        checkParams(asset, attributes, requiredParams);
+
         const initiate = {
             pipeline() {
-                const requiredParams = ['definition', 'project', 'group'];
-                checkParams(asset, attributes, requiredParams);
                 return { body: { ...attributes }, endPoint: `${urls.initiate}${asset}` }
             }
         };
@@ -147,11 +150,12 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let invoke = (asset, attributes) => {
-        checkAvailableAssets('export', asset, availableAssetsOnMethods['invoke']);
+        checkAvailableAssets('export', asset, availableAssets['invoke']);
+        const requiredParams = availableAssets['invoke'][asset];
+        checkParams(asset, attributes, requiredParams);
+
         const invoke = {
             plugin() {
-                const requiredParams = ['plugin', 'method'];
-                checkParams(asset, attributes, requiredParams);
                 return { body: { ...attributes }, endPoint: `${urls.invoke}${asset}` }
             }
         };
@@ -161,16 +165,15 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let expo = (asset, attributes) => {
-        checkAvailableAssets('export', asset, availableAssetsOnMethods['expo']);
+        checkAvailableAssets('export', asset, availableAssets['expo']);
+        const requiredParams = availableAssets['expo'][asset];
+        checkParams(asset, attributes, requiredParams);
+
         const expo = {
             pipeline() {
-                const requiredParams = ['pipeline'];
-                checkParams(asset, attributes, requiredParams);
                 return { body: { ...attributes }, endPoint: `${urls.expo}${asset}` }
             },
             project() {
-                const requiredParams = ['project'];
-                checkParams(asset, attributes, requiredParams);
                 return { body: { ...attributes }, endPoint: `${urls.expo}${asset}` }
             },
         };
@@ -180,33 +183,28 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     const get = (asset, attributes) => {
-        checkAvailableAssets('get', asset, availableAssetsOnMethods['get']);
+        checkAvailableAssets('get', asset, availableAssets['get']);
+        const requiredParams = availableAssets['get'][asset];
+        checkParams(asset, attributes, requiredParams);
 
         const get = {
             __getPiRelated() {
-                const requiredParams = ['pi'];
-                checkParams(asset, attributes, requiredParams);
                 return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
             },
             token() {
                 return { body: {}, endPoint: `${urls.get}${asset}` }
             },
             system_log() {
-                return {
-                    body: { ...attributes }, endPoint: `${urls.get}${asset}`,
-
-                }
+                return this.__getPiRelated()
             },
             settings() {
-                return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
+                return this.__getPiRelated()
             },
             worklist() {
-                return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
+                return this.__getPiRelated()
             },
             pipeline() {
-                const requiredParams = ['pipeline'];
-                checkParams(asset, attributes, requiredParams);
-                return { body: { ...attributes }, endPoint: `${urls.get}${asset}` }
+                return this.__getPiRelated()
             },
             pipelineinstance() {
                 return this.__getPiRelated()
@@ -231,13 +229,12 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let update = (asset, attributes) => {
-        checkAvailableAssets('update', asset, availableAssetsOnMethods['update']);
+        checkAvailableAssets('update', asset, availableAssets['update']);
+        const requiredParams = availableAssets['update'][asset];
+        checkParams(asset, attributes, requiredParams);
 
         const update = {
             cloud() {
-                const requiredParams = ['name'];
-                checkParams(asset, attributes, requiredParams);
-
                 const body = Object.keys(attributes).reduce((acc, cur) => {
                     if (attributes[cur]) { acc[cur] = attributes[cur] }
                     return acc
@@ -248,8 +245,6 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
                 }
             },
             user() {
-                const requiredParams = ['user'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes }, endPoint: `${urls.update}${asset}`
                 }
@@ -261,27 +256,22 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
     };
 
     let create = (asset, attributes) => {
-        console.log('asset from create function', asset);
-        checkAvailableAssets('create', asset, availableAssetsOnMethods['create']);
+        checkAvailableAssets('create', asset, availableAssets['create']);
+        const requiredParams = availableAssets['create'][asset];
+        checkParams(asset, attributes, requiredParams);
 
         const create = {
             project() {
-                const requiredParams = ['name'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes } , endPoint: `${urls.create}${asset}`
                 }
             },
             asset() {
-                const requiredParams = ['name'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes }, endPoint: `${urls.create}${asset}`
                 }
             },
             cloud() {
-                const requiredParams = ['name', 'provider', 'apiUrl', 'apiProtocol'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: {
                         apiurl: attributes.apiUrl,
@@ -291,8 +281,6 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
                 }
             },
             account() {
-                const requiredParams = ['name', 'provider', 'login', 'password', 'defaultCloud'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: {
                         default_cloud: attributes.defaultCloud,
@@ -301,22 +289,16 @@ export default (host, port, protocol, token, postFn, getFn, isBasic) => {
                 }
             },
             credential() {
-                const requiredParams = ['name', 'username', 'password'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes }, endPoint: `${urls.create}${asset}`
                 }
             },
             tag() {
-                const requiredParams = ['name'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes }, endPoint: `${urls.create}${asset}`
                 }
             },
             user() {
-                const requiredParams = ['user', 'name', 'role'];
-                checkParams(asset, attributes, requiredParams);
                 return {
                     body: { ...attributes }, endPoint: `${urls.create}${asset}`
                 }

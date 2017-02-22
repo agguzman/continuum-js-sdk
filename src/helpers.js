@@ -1,6 +1,6 @@
 
-export const checkAvailableAssets = (fn, asset, availableAssets=[]) => {
-    if (!availableAssets.includes(asset.toLowerCase())) {
+export const checkAvailableAssets = (fn, asset, availableAssets={}) => {
+    if (!availableAssets.hasOwnProperty(asset.toLowerCase())) {
         throw new Error(`Asset ${asset} not available to ${fn}.`)
     }
     return true
